@@ -10,6 +10,7 @@
 #' @examples
 #' url <- "http://elearning.ne.sysu.edu.cn/webapps/discussionboard/do/message?layer=forum&currentUserInfo=***&conf_id=_413_1&numAttempts=1626&type=user_forum&attempt_id=_5918115_1&callBackUrl=%2Fwebapps%2Fgradebook%2Fdo%2Finstructor%2FviewNeedsGrading%3Fcourse_id%3D_405_1%26courseMembershipId%3D_3928655_1%26outcomeDefinitionId%3D_114127_1&forum_id=_61110_1&currentAttemptIndex=1&nav=discussion_board_entry&action=collect_forward&origRequestId=0D68B9644B97B73FA532AC7B5119169C.root_1498061370964&user_id=_227280_1&course_id=_405_1&sequenceId=_405_1_0&viewInfo=%E9%9C%80%E8%A6%81%E8%AF%84%E5%88%86&"
 #' param <- url2params(url, is_return = TRUE)
+#' @import magrittr
 #' @export
 url2params <- function(url, show = TRUE, clip = FALSE, 
     quote = FALSE, 

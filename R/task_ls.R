@@ -3,7 +3,7 @@
 #'
 #' @inheritParams task_create
 #' @param encoding encoding of the CSV which schtasks.exe generates. Defaults to UTF-8.
-#' @param ... optional arguments passed on to \code{fread} in order to read in the CSV file which schtasks generates
+#' @param ... optional arguments passed on to `fread` in order to read in the CSV file which schtasks generates
 #' @param wildcard boolean, whether use regexpr to match task?
 #' 
 #' @return a data.frame with scheduled tasks as returned by schtasks /Query for which the Taskname or second

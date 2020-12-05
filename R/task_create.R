@@ -8,15 +8,15 @@
 #' the log of the run will be put in the .log file which can be found in the same directory
 #' as the location of the rscript.
 #'
-#' @param rscript filepath or \code{\link{quote}} object. Should not contain any spaces.
+#' @param rscript filepath or [quote()] object. Should not contain any spaces.
 #' @param taskname a character string with the name of the task. Defaults to the filename. Should not contain any spaces.
 #' @param workdir working directory
 #'
-#' @param schedule when to schedule the \code{rscript}.
+#' @param schedule when to schedule the `rscript`.
 #' Either one of 'ONCE', 'MONTHLY', 'WEEKLY', 'DAILY', 'HOURLY', 'MINUTE', 'ONLOGON', 'ONIDLE'.
 #' @param starttime a timepoint in HH:mm format indicating when to run the script. Defaults to within 62 seconds.
 #' @param startdate a date that specifies the first date on which to run the task.
-#' Only applicable if schedule is of type 'MONTHLY', 'WEEKLY', 'DAILY', 'HOURLY', 'MINUTE'. Defaults to today in '\%d/\%m/\%Y' format. Change to your locale format if needed.
+#' Only applicable if schedule is of type 'MONTHLY', 'WEEKLY', 'DAILY', 'HOURLY', 'MINUTE'. Defaults to today in `\%d/\%m/\%Y` format. Change to your locale format if needed.
 #' @param days character string with days on which to run the script if schedule is 'WEEKLY' or 'MONTHLY'. Possible values
 #' are * (all days). For weekly: 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN' or a vector of these in your locale.
 #' For monthly: 1:31 or a vector of these.
@@ -26,10 +26,10 @@
 #' @param idletime integer, containing a value that specifies the amount of idle time to wait before
 #' running a scheduled ONIDLE task. The valid range is 1 - 999 minutes.
 #' @param Rexe path to Rscript.exe which will be used to run the script. Defaults to Rscript at the bin folder of R_HOME.
-#' @param rscript_args character string with further arguments passed on to Rscript. See args in \code{\link{Rscript}}.
+#' @param rscript_args character string with further arguments passed on to Rscript. See args in [Rscript()].
 #' @param schtasks_extra character string with further schtasks arguments. See the inst/docs/schtasks.pdf
 #' If you want to hide the cmd popuping windows, you need to pass
-#' \code{'/RU "username" /RP "passwd"'} to schtasks_extra.
+#' `/RU "username" /RP "passwd"` to schtasks_extra.
 #'
 #' @param debug logical
 #'

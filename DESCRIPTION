@@ -2,11 +2,7 @@ Package: curlR
 Title: What the Package Does (One Line, Title Case)
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "First",
-           family = "Last",
-           role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
+    c(person("Dongdong", "Kong", role = c("aut", "cre"), email = "kongdd.sysu@gmail.com"))
 Description: What the package does (one paragraph).
 License: GPL-3
 Encoding: UTF-8
@@ -15,7 +11,8 @@ Imports:
     httr,
     xml2,
     magrittr,
-    lubridate, glue
+    lubridate, glue,
+    reticulate
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Suggests: 

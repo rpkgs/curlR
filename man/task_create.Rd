@@ -24,7 +24,7 @@ task_create(
 )
 }
 \arguments{
-\item{rscript}{filepath or \code{\link{quote}} object. Should not contain any spaces.}
+\item{rscript}{filepath or \code{\link[=quote]{quote()}} object. Should not contain any spaces.}
 
 \item{taskname}{a character string with the name of the task. Defaults to the filename. Should not contain any spaces.}
 
@@ -36,7 +36,7 @@ Either one of 'ONCE', 'MONTHLY', 'WEEKLY', 'DAILY', 'HOURLY', 'MINUTE', 'ONLOGON
 \item{starttime}{a timepoint in HH:mm format indicating when to run the script. Defaults to within 62 seconds.}
 
 \item{startdate}{a date that specifies the first date on which to run the task.
-Only applicable if schedule is of type 'MONTHLY', 'WEEKLY', 'DAILY', 'HOURLY', 'MINUTE'. Defaults to today in '\\%d/\\%m/\\%Y' format. Change to your locale format if needed.}
+Only applicable if schedule is of type 'MONTHLY', 'WEEKLY', 'DAILY', 'HOURLY', 'MINUTE'. Defaults to today in \verb{\\\%d/\\\%m/\\\%Y} format. Change to your locale format if needed.}
 
 \item{days}{character string with days on which to run the script if schedule is 'WEEKLY' or 'MONTHLY'. Possible values
 are * (all days). For weekly: 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN' or a vector of these in your locale.
@@ -52,11 +52,11 @@ running a scheduled ONIDLE task. The valid range is 1 - 999 minutes.}
 
 \item{Rexe}{path to Rscript.exe which will be used to run the script. Defaults to Rscript at the bin folder of R_HOME.}
 
-\item{rscript_args}{character string with further arguments passed on to Rscript. See args in \code{\link{Rscript}}.}
+\item{rscript_args}{character string with further arguments passed on to Rscript. See args in \code{\link[=Rscript]{Rscript()}}.}
 
 \item{schtasks_extra}{character string with further schtasks arguments. See the inst/docs/schtasks.pdf
 If you want to hide the cmd popuping windows, you need to pass
-\code{'/RU "username" /RP "passwd"'} to schtasks_extra.}
+\verb{/RU "username" /RP "passwd"} to schtasks_extra.}
 
 \item{debug}{logical}
 }

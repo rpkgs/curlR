@@ -9,7 +9,6 @@ def sendEmail(receiver='kongdd@mail2.sysu.edu.cn', mail_title='ChinaWater', mail
     # qq mail sending server
     host_server = 'smtp.qq.com'
     sender_mail = "991810576@qq.com"
-    # sender_mail = Address('Dongdong Kong', '991810576@qq.com', "qq.com")
     sender_passcode = ''
 
     # ssl login

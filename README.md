@@ -2,7 +2,7 @@
 # curlR
 
 <!-- badges: start -->
-[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/rpkgs/curlR?branch=master&svg=true)](https://ci.appveyor.com/project/rpkgs/curlR)
+[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/rpkgs/curlR?branch=master&svg=true)](https://ci.appveyor.com/project/kongdd/curlR)
 [![Codecov test coverage](https://codecov.io/gh/rpkgs/curlR/branch/master/graph/badge.svg)](https://codecov.io/gh/rpkgs/curlR?branch=master)
 <!-- badges: end -->
 

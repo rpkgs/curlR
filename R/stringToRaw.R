@@ -15,8 +15,9 @@
 #' @export
 stringToRaw <- function(str) {
     string <- raw()
-    for (i in 1:(str_length(str) / 2)) {
-        string[i] <- str_sub(str, (2 * i - 1), (2 * i)) %>%
+    str %<>% gsub("\n| ", "", .)
+    for (i in 1:(nchar(str) / 2)) {
+        string[i] <- substr(str, (2 * i - 1), (2 * i)) %>%
             as.hexmode() %>%
             unlist() %>%
             as.raw()

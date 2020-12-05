@@ -1,3 +1,10 @@
+#' format POSIXt
+#' @export
+format_POSIXt <- function(date) {
+    format(date, "%Y-%m-%d %H:%M:00")
+}
+
+
 #' @import lubridate
 #' @export
 add_month <- function(x, n) {
