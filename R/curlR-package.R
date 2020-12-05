@@ -1,3 +1,6 @@
+#' @import xml2
+#' @import RSelenium
+#' @import magrittr
 #' @keywords internal
 "_PACKAGE"
 
