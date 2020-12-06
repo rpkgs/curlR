@@ -2,6 +2,8 @@
 #' @import RSelenium
 #' @import magrittr
 #' @keywords internal
+#' 
+#' @importFrom stringr str_extract str_split
 "_PACKAGE"
 
 # The following block is used by usethis to automatically manage
@@ -12,7 +14,6 @@ NULL
 
 
 env <- environment()
-
 init_python <- function() {
     file <- system.file("python/sendEmail.py", package = "curlR")
     reticulate::source_python(file, envir = env)
@@ -20,5 +21,5 @@ init_python <- function() {
 }
 
 #' @importFrom reticulate source_python
-.onLoad <- function(libname, pkgname) {    
+.onLoad <- function(libname, pkgname) {
 }

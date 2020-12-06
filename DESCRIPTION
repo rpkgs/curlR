@@ -11,8 +11,10 @@ Imports:
     RSelenium, httr,
     xml2,
     magrittr,
+    stringr,
     lubridate, glue,
-    reticulate
+    reticulate,
+    methods
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Suggests: 

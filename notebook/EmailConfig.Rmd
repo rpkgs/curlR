@@ -1,0 +1,81 @@
+---
+title: "QQ Email授权"
+author: "Dongdong Kong"
+date: "2020/12/6"
+output: 
+  html_document:
+    number_sections: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# 背景
+
+自动发邮件可以用来干什么？（1）在运行一个大型的、耗时较长的程序时，自动邮件可以告诉你程序运行进度和程序运行的结果；（2）在爬虫应用中，由于对方网站的更新，经常会使原来的爬虫程序中断。对于只展示一天数据的网站（如中国逐日径流数据），如果不能及时发现爬虫程序的中断，就会损失很多天的数据。
+
+# 如何自动发邮件
+
+1. 安装`curlR`: `devtools::install_github("rpkgs/curlR")`
+
+2. 设置Python默认路径
+
+  `curlR`的邮件发送功能对接的是Python的`smtplib`库，因此你需要有一个可用的Python环境。可以用如下代码在R语言中设置python的默认路径：
+
+  ```R
+  # usethis::edit_r_profile() # open .Rprofile
+  Sys.setenv(RETICULATE_PYTHON = "c:/ProgramData/Anaconda3/python.exe") # 这里修改成你的Python路径
+  ```
+
+3. 获取Email PassCode
+
+  目前仅对接了QQ邮箱的授权。其他邮箱的授权也不在话下，不过需要读者自行调试。
+  如何获取QQ Email PassCode？
+
+  * 登陆到qq邮箱
+
+  * 点击设置
+
+    ![](images\QQ_EmailSetting.png)
+
+  * 点击账户，翻到POP3，点击生成授权码
+
+  ![](images\QQ_GeneratePassCode.png)
+
+  ![](images\QQ_PassCode.png)
+
+  记录该授权码，即PassCode；user则为你的qq邮箱。
+
+4. 返回R语言进行授权
+
+```r
+EmailConfig_qq("user@qq.com", "efkvkspmmdqyXXXX")
+# 授权一次即可，可以长期使用
+```
+
+5. 测试发送邮件
+
+```R
+sendEmail("user@qq.com", content = "This is a email sent by curlR")
+```
+如无意外你将收到curlR发送的邮件：
+![](images\test-email.png)
+
+# 实战
+
+## 具体爬虫应用
+
+下面代码实现了爬虫程序出错，即刻通知开发者的功能。并把报错时间和报错信息一并提交。
+如需使用sendEmail报告程序进度，方法类似，读者可自行触类旁通。
+
+```r
+tryCatch({
+    d <- curl_RealtimeMete2000(date_begin,date_end, outdir = outdir)
+}, error = function(e){
+    message = e$message
+    sendEmail(title = sprintf("ChinaWater stoped at %s!", format(date_end)), content = message)
+})
+```
+
+如有疑问，欢迎留言。

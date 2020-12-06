@@ -3,29 +3,41 @@ from email.mime.text import MIMEText
 from email.header import Header
 # from email.headerregistry import Address
 from smtplib import SMTP_SSL
+import json
 
 
-def sendEmail(receiver='kongdd@mail2.sysu.edu.cn', mail_title='ChinaWater', mail_content=''):
+def getUserInfo(fileConfig="config.json"):
+    with open(fileConfig) as f:
+        data = json.load(f)
+    return data
+    
+
+def sendEmail_py(
+    receiver='kongdd@mail2.sysu.edu.cn', 
+    mail_title='ChinaWater', 
+    mail_content='', 
+    fileConfig="config.json"):
+    
     # qq mail sending server
-    host_server = 'smtp.qq.com'
-    sender_mail = "991810576@qq.com"
-    sender_passcode = ''
+    userInfo = getUserInfo(fileConfig)
+    server = userInfo["server"][0]
+    user = userInfo["user"][0]
+    passwd = userInfo["PassCode"][0]
 
     # ssl login
-    smtp = SMTP_SSL(host_server)
+    smtp = SMTP_SSL(server)
+    smtp.ehlo(server)
     # set_debuglevel() for debug, 1 enable debug, 0 for disable
     # smtp.set_debuglevel(1)
-    smtp.ehlo(host_server)
-    smtp.login(sender_mail, sender_passcode)
+    smtp.login(user, passwd)
 
     # construct message
     msg = MIMEText(mail_content, "plain", 'utf-8')
     msg["Subject"] = Header(mail_title, 'utf-8')
-    msg["From"] = Header("ChinaWater crawler", 'utf-8')
+    msg["From"] = Header(user, 'utf-8')
     msg["To"] = receiver
-    smtp.sendmail(sender_mail, receiver, msg.as_string())
+    smtp.sendmail(user, receiver, msg.as_string())
     smtp.quit()
-
 
 # if __name__ == "__main__":
 #     # receiver mail
