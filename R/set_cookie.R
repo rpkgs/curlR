@@ -24,7 +24,7 @@ set_cookie_file <- function(cookiefile = "cookies.txt"){
 
 #' @export
 get_cookie <- function(str_cookie){
-    xs = str_split(cookie, "; ")[[1]]
+    xs = str_split(str_cookie, "; ")[[1]]
     name = str_extract(xs, ".*(?==)")
     value = str_extract(xs, "(?<==).*")
     set_names(value, name)

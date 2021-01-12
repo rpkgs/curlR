@@ -6,3 +6,5 @@
 *.json
 task/
 inst/bin
+
+*/temp/*

@@ -1,7 +1,7 @@
 #' Get query paramters from URL address
 #' 
 #' @param url the url of the page to retrieve
-#' @param show If TRUE, it whill print returned parameter in the console.
+#' @param verbose If TRUE, it whill print returned parameter in the console.
 #' @param clip If TRUE, it will get url string from clipboard
 #' @param quote If TRUE, params names print in console will use quote.
 #' @param is_iconv whether convert encoding from utf-8 to gbk
@@ -12,9 +12,10 @@
 #' param <- url2params(url, is_return = TRUE)
 #' @import magrittr
 #' @export
-url2params <- function(url, show = TRUE, clip = FALSE, 
+url2params <- function(url, 
+    verbose = TRUE, clip = FALSE, 
     quote = FALSE, 
-    is_iconv = TRUE,
+    is_iconv = FALSE,
     is_return = FALSE)
 {
     if (clip) url <- suppressWarnings(readLines("clipboard"))
@@ -35,7 +36,7 @@ url2params <- function(url, show = TRUE, clip = FALSE,
             paste0("param <- list(\n", ., "\n)") 
     }
 
-    if (show) cat(str)
+    if (verbose) cat(str)
     if (.Platform$OS.type == "windows"){ writeLines(str, 'clipboard') }
     if (is_return) return(params)
 }

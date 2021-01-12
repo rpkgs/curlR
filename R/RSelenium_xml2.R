@@ -21,6 +21,12 @@ setMethod(f = "show",
 #' @export
 xml_html <- function(x, parse = TRUE) UseMethod("xml_html")
 
+#' @export
+xml_find_all <- function(x, pattern, type = "xpath") UseMethod("xml_find_all")
+
+#' @export
+xml_find_first <- function(x, pattern, type = "xpath") UseMethod("xml_find_first")
+
 # ' @export
 # xml_find_all <- function(x, ...) UseMethod("xml_find_all")
 
@@ -40,6 +46,12 @@ text2xml <- function(x){
     read_html(x) %>% xml_find_first("//body") %>% xml_children()
 }
 
+xml_find_class <- function(x, pattern) {
+    elem <- x$findElement("class name", pattern)
+    # print(elem)
+    elem
+}
+
 #' @export
 xml_find_first.remoteDriver <- function(x, pattern, type = "xpath"){
     elem <- x$findElement(type, pattern)
@@ -47,14 +59,8 @@ xml_find_first.remoteDriver <- function(x, pattern, type = "xpath"){
     elem
 }
 
-xml_find_class <-function(x, pattern) {
-    elem <- x$findElement("class name", pattern)
-    # print(elem)
-    elem
-}
-
 #' @export
-xml_find_all <- function(x, pattern, type = "xpath"){
+xml_find_all.remoteDriver <- function(x, pattern, type = "xpath"){
     elem <- x$findElements(type, pattern)
     elem
 }

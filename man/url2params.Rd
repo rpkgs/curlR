@@ -6,17 +6,17 @@
 \usage{
 url2params(
   url,
-  show = TRUE,
+  verbose = TRUE,
   clip = FALSE,
   quote = FALSE,
-  is_iconv = TRUE,
+  is_iconv = FALSE,
   is_return = FALSE
 )
 }
 \arguments{
 \item{url}{the url of the page to retrieve}
 
-\item{show}{If TRUE, it whill print returned parameter in the console.}
+\item{verbose}{If TRUE, it whill print returned parameter in the console.}
 
 \item{clip}{If TRUE, it will get url string from clipboard}
 
