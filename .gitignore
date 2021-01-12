@@ -5,6 +5,6 @@
 *.html
 *.json
 task/
-inst/bin
+# inst/bin
 
 */temp/*

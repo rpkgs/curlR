@@ -9,8 +9,9 @@
 init_selenium <- function(port = 4444) {
     # java -jar selenium-server-standalone-3.141.59.jar -port 4444
     bin <- system.file("bin/selenium-server-standalone-3.141.59.jar", package = "curlR")
+    driver <- system.file("bin/geckodriver.exe", package = "curlR")
     dir <- dirname(bin)
-    cmd <- glue("cd {dir} && java -jar {bin} -port {port}")
+    cmd <- glue("java -Dwebdriver.gecko.driver={driver} -jar {bin} -port {port}")
     shell(cmd, wait = FALSE)
 
     p <- remoteDriver(
