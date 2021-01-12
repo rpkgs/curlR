@@ -1,60 +1,71 @@
+OS = .Platform$OS.type
+# switch(OS, windows, unix)
+
 #' init_selenium
-#' 
-#' @examples 
+#'
+#' @examples
 #' # init_selenium(6666)
 #' # kill_selenium(6666)
 #' @import glue
 #' @importFrom RSelenium remoteDriver
-#' @export 
+#' @export
 init_selenium <- function(port = 4444) {
     # java -jar selenium-server-standalone-3.141.59.jar -port 4444
-    bin <- system.file("bin/selenium-server-standalone-3.141.59.jar", package = "curlR")
-    driver <- system.file("bin/geckodriver.exe", package = "curlR")
-    dir <- dirname(bin)
-    cmd <- glue("java -Dwebdriver.gecko.driver={driver} -jar {bin} -port {port}")
-    shell(cmd, wait = FALSE)
-
-    p <- remoteDriver(
-        "localhost",
-        port = port,
-        browserName = "firefox"
-    )
+    selenium <- system.file("bin/selenium-server-standalone-3.141.59.jar", package = "curlR")
+    dir <- dirname(selenium)
+    if (OS == "windows") {
+        driver <- system.file("bin/geckodriver.exe", package = "curlR")
+    } else {
+        driver <- system.file("bin/geckodriver", package = "curlR")
+    }
+    cmd <- glue("java -Dwebdriver.gecko.driver={driver} -jar {selenium} -port {port}")
+    system(cmd, wait = FALSE)
+    Sys.sleep(1)
+    
+    p <- RSelenium::remoteDriver("localhost", port = port, browserName = "firefox")
     p$open()
-    p$maxWindowSize()
+    # p$maxWindowSize()
     p
 }
 
 #' @export
 #' @rdname init_selenium
 kill_selenium <- function(port = 4444){
-    os = .Platform$OS.type
-    if (os == "windows") {
+    pid <- getPidByPort(port)
+    if (length(pid) == 0) {
+        message(glue("[ok] no corresponding PID"))
+        return()
+    }
+
+    if (OS == "windows") {
         # system("taskkill /IM selenium-server -f")
         # system("taskkill /IM selenium-server -f")
         # system('taskkill /fi "imagename eq java.exe" -f')
-        pid <- getPidByPort(port)
-        if (is.na(pid)) {
-            message(glue("[ok] no corresponding PID"))
-            return()
-        }
-        
         system(glue('tasklist /FI "PID eq {pid}"'))
         system(glue('taskkill /FI "PID eq {pid}" -f'))
-    } else if (os == "unix"){
-        system("pkill -f R")
-        # NULL
+    } else if (OS == "unix"){
+        # cmd = "pkill -f R"
+        cmd = glue("kill -9 {pid}")
+        print(cmd)
+        system(cmd)
     }
     invisible()
 }
 
 #' @export
 getPidByPort <- function(port = 4444) {
-    res = suppressWarnings({
-        shell(glue("netstat -a -n -o | grep {port} |  grep LISTENING"), intern = TRUE)
-    }) 
-    if (length(res) > 0) {
-        str_extract(res, "(?<=LISTENING\\s{1,20})\\d{1,}") %>% unique()
-    } else {
-        NA
-    }
+    # lsof -i -P -n | grep LISTEN | grep 4444
+    OS = .Platform$OS.type
+    pid = suppressWarnings({
+        if (OS == "windows") {
+            r = shell(glue("netstat -a -n -o | grep {port} | grep LISTEN"), intern = TRUE)
+            str_extract(res, "(?<=LISTENING\\s{1,20})\\d{1,}") %>% unique()
+        } else {
+            cmd = glue('netstat -tulpn | grep "{port} " | grep LISTEN')
+            print(cmd)
+            r = system(cmd, intern = TRUE, ignore.stderr = TRUE)
+            str_extract(r, "(?<=LISTEN\\s{1,20})\\d{1,}") %>% unique()
+        }
+    })
+    as.numeric(pid)
 }

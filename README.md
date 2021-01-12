@@ -25,3 +25,8 @@ library(curlR)
 ## basic example code
 # git remote set-url origin https://github.com/rpkgs/curlR
 ```
+
+## selenium 
+```bash
+sudo apt-get install chromium-chromedriver
+```
