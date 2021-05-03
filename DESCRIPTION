@@ -8,15 +8,20 @@ License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Imports: 
-    RSelenium, httr,
+    RSelenium,
+    httr,
     xml2,
     magrittr,
     stringr,
     data.table,
     jsonlite,
-    lubridate, glue,
+    lubridate,
+    glue,
     reticulate,
-    methods
+    RSQLite,
+    methods,
+    plyr,
+    Ipaper
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Suggests: 

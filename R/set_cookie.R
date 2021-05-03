@@ -39,6 +39,7 @@ set_cookie_chr <- function(str_cookie) {
 #' @param cookies data.frame object, at least with "name" and "value".
 #' @rdname set_cookie
 #' 
+#' @importFrom data.table fwrite
 #' @export
 write_cookie <- function(cookies, cookiefile = "cookies.txt"){
     if (nrow(cookies) > 0) {

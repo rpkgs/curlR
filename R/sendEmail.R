@@ -1,5 +1,5 @@
 .config <- list2env(list(python = FALSE))
-fileConfig <- "~/.R/curlR.json" # system.file("~/config.json", package = "curlR")
+fileConfig <- normalizePath("~/.R/curlR.json") # system.file("~/config.json", package = "curlR")
 
 #' send email by email and smtplib
 #'
@@ -21,10 +21,10 @@ sendEmail <- function(receiver = "kongdd@mail2.sysu.edu.cn", content = "", title
     file <- system.file("python/sendEmail.py", package = "curlR")
     reticulate::source_python(file)
 
-    if (file.exists(Sys.getenv("RETICULATE_PYTHON")) && !.config$python) {
-        init_python()
-        .config$python = TRUE
-    }
+    # if (file.exists(Sys.getenv("RETICULATE_PYTHON")) && !.config$python) {
+    #     # init_python()
+    #     .config$python = TRUE
+    # }
     sendEmail_py(receiver, title, content, fileConfig = fileConfig)
 }
 

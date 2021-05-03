@@ -19,12 +19,13 @@ set_text <- function(x, value) {
 #' @export
 focus_first_window <- function(p) {
     # TODO: fix here
-    handles <- p$getWindowHandles() %>% map_chr(~.)
+    handles <- p$getWindowHandles() %>% sapply(self)
     p$switchToWindow(first(handles))
 }
 
 #' @export
 focus_last_window <- function(p) {
-    handles <- p$getWindowHandles() %>% map_chr(~.)
+    handles <- p$getWindowHandles() %>% sapply(self)
     p$switchToWindow(last(handles))
 }
+

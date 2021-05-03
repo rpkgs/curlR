@@ -81,7 +81,7 @@ write_db_batch <- function(dbname = "chinawater.db", files, overwrite = TRUE) {
     timeinfo <- guess_time(files) %>%
         timeinfo() %>%
         unique()
-    runoff_hourly <- llply(files, read_csv, .progress = "text") %>%
+    runoff_hourly <- plyr::llply(files, read_csv, .progress = "text") %>%
         do.call(rbind, .) %>%
         unique()
 

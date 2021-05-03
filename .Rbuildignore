@@ -7,3 +7,5 @@
 ^task$
 ^scripts$
 ^notebook$
+^\.github$
+^debug\.R$

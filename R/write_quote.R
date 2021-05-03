@@ -3,7 +3,7 @@
 #' @return file path of `rscript`
 #' @export
 write_quote <- function(rscript, outfile, 
-    header = c("library(ChinaWater); library(lubridate); print(getwd());")) 
+    header = c("#! /usr/bin/Rscript \nlibrary(ChinaWater); library(lubridate); print(getwd());")) 
 {
     if (typeof(rscript) == "language"){ # quoteobj
         scripts <- deparse(rscript)

@@ -7,7 +7,8 @@
 write_quote(
   rscript,
   outfile,
-  header = c("library(ChinaWater); library(lubridate); print(getwd());")
+ 
+    header = c("#! /usr/bin/Rscript \\nlibrary(ChinaWater); library(lubridate); print(getwd());")
 )
 }
 \value{

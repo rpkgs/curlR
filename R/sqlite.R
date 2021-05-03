@@ -30,8 +30,8 @@ read_csv <- function(file) {
 }
 
 db_merge <- function(db1, db2) {
-    l1 <- db_read(db1)
-    l2 <- db_read(db2)
+    l1 <- read_db(db1)
+    l2 <- read_db(db2)
 }
 
 #' @export

@@ -3,6 +3,11 @@
 #' @import magrittr
 #' @keywords internal
 #' 
+#' @importFrom Ipaper runningId fprintf check_dir first last listk reorder_name rm_empty which.isnull
+#' @importFrom data.table data.table is.data.table
+#' @importFrom plyr llply ldply
+#' @importFrom utils URLdecode download.file read.csv
+#' @importFrom stats setNames
 #' @importFrom stringr str_extract str_split
 "_PACKAGE"
 
@@ -22,4 +27,9 @@ NULL
 
 #' @importFrom reticulate source_python
 .onLoad <- function(libname, pkgname) {
+    if(getRversion() >= "2.15.1") {
+        utils::globalVariables(
+            c(".", "timenum", "timeinfo", "TaskName", "time", "res", "sendEmail_py")
+        )
+    }
 }
