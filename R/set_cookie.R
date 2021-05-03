@@ -11,7 +11,7 @@ NULL
 #' @export
 set_cookie_file <- function(cookiefile = "cookies.txt"){
     if (file.exists(cookiefile)) {
-        d <- fread(cookiefile)
+        d = read.csv(cookiefile)
         cookies <- set_names(d$value, d$name)
         config <- set_cookies(cookies)
         # set_config(config, override = TRUE)

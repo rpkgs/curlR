@@ -12,6 +12,8 @@ Imports:
     xml2,
     magrittr,
     stringr,
+    data.table,
+    jsonlite,
     lubridate, glue,
     reticulate,
     methods

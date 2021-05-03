@@ -13,12 +13,12 @@
 NULL
 
 
-env <- environment()
-init_python <- function() {
-    file <- system.file("python/sendEmail.py", package = "curlR")
-    reticulate::source_python(file, envir = env)
-    invisible()
-}
+# env <- environment()
+# #' @export 
+# init_python <- function() {
+#     env <- environment(.onLoad)
+#     invisible()
+# }
 
 #' @importFrom reticulate source_python
 .onLoad <- function(libname, pkgname) {

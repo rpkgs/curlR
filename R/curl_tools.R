@@ -21,7 +21,8 @@ runningId <- function(i, step = 1, N, prefix = "") {
 # ------------------------------------------------------------------------------
 #' xml_json
 #' @param x request object
-#'
+#' 
+#' @importFrom jsonlite fromJSON
 #' @export
 xml_json <- function(x) {
     content(x, encoding = "utf-8") %>%

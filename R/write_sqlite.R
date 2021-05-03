@@ -65,6 +65,7 @@ write_db <- function(con, d, time, overwrite = FALSE, append = TRUE, mink = 10) 
 #' @param mink minimum records
 #'
 #' @rdname write_db
+#' @importFrom data.table fread
 #' @export
 write_db_char <- function(con, file, overwrite = FALSE, append = TRUE, mink = 10) {
     d <- fread(file)
