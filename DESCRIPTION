@@ -20,10 +20,11 @@ Imports:
     reticulate,
     RSQLite,
     methods,
-    plyr,
-    Ipaper
+    Ipaper,
+    plyr
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
+Remotes: rpkgs/Ipaper
 Suggests: 
     testthat,
     covr
