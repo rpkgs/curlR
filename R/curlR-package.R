@@ -1,10 +1,9 @@
-#' @import xml2
 #' @import RSelenium
 #' @import magrittr
 #' @keywords internal
 #' 
-#' @importFrom Ipaper runningId fprintf check_dir first last listk reorder_name rm_empty which.isnull
-#' @importFrom data.table data.table is.data.table
+#' @importFrom Ipaper runningId fprintf check_dir listk reorder_name rm_empty which.isnull
+#' @importFrom data.table data.table is.data.table first last
 #' @importFrom plyr llply ldply
 #' @importFrom utils URLdecode download.file read.csv
 #' @importFrom stats setNames
@@ -32,4 +31,18 @@ NULL
             c(".", "timenum", "timeinfo", "TaskName", "time", "res", "sendEmail_py")
         )
     }
+    # add chrome to path
+    # .prepend_path("PATH", "/opt/anaconda3/bin")
+}
+
+
+#' prepend_path
+#' 
+#' @keywords internal
+#' @export
+prepend_path <- function(NAME, VALUE) {
+    vals <- Sys.getenv(NAME)
+    vals <- paste0(VALUE, ":", vals)
+    cmd <- sprintf("Sys.setenv(%s=vals)", NAME)
+    eval(parse(text = cmd))
 }

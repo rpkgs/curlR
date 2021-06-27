@@ -3,26 +3,37 @@ OS = .Platform$OS.type
 
 #' init_selenium
 #'
+#' @param browserName firefox or chrome
+#' 
 #' @examples
 #' # init_selenium(6666)
 #' # kill_selenium(6666)
 #' @import glue
 #' @importFrom RSelenium remoteDriver
 #' @export
-init_selenium <- function(port = 4444) {
+init_selenium <- function(port = 4444, browserName = "firefox") {
     # java -jar selenium-server-standalone-3.141.59.jar -port 4444
     selenium <- system.file("bin/selenium-server-standalone-3.141.59.jar", package = "curlR")
     dir <- dirname(selenium)
-    if (OS == "windows") {
-        driver <- system.file("bin/geckodriver.exe", package = "curlR")
-    } else {
-        driver <- system.file("bin/geckodriver", package = "curlR")
+    if (browserName == "firefox") {
+        prefix = "gecko"
+    } else if (browserName == "chrome") {
+        prefix = "chrome"
     }
-    cmd <- glue("java -Dwebdriver.gecko.driver={driver} -jar {selenium} -port {port}")
+    
+    # chrome or gecko
+    if (OS == "windows") {
+        driver <- system.file(glue("bin/{prefix}driver.exe"), package = "curlR")
+    } else {
+        driver <- system.file(glue("bin/{prefix}driver"), package = "curlR")
+    }
+    
+    cmd <- glue("java -Dwebdriver.{prefix}.driver={driver} -jar {selenium} -port {port}")
+    print(cmd)
     system(cmd, wait = FALSE)
     Sys.sleep(1)
     
-    p <- RSelenium::remoteDriver("localhost", port = port, browserName = "firefox")
+    p <- RSelenium::remoteDriver("localhost", port = port, browserName = browserName)
     p$open()
     # p$maxWindowSize()
     p
@@ -59,7 +70,7 @@ getPidByPort <- function(port = 4444) {
     pid = suppressWarnings({
         if (OS == "windows") {
             r = shell(glue("netstat -a -n -o | grep {port} | grep LISTEN"), intern = TRUE)
-            str_extract(res, "(?<=LISTENING\\s{1,20})\\d{1,}") %>% unique()
+            str_extract(r, "(?<=LISTENING\\s{1,20})\\d{1,}") %>% unique()
         } else {
             cmd = glue('netstat -tulpn | grep "{port} " | grep LISTEN')
             print(cmd)

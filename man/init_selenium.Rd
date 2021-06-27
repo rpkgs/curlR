@@ -5,9 +5,12 @@
 \alias{kill_selenium}
 \title{init_selenium}
 \usage{
-init_selenium(port = 4444)
+init_selenium(port = 4444, browserName = "firefox")
 
 kill_selenium(port = 4444)
+}
+\arguments{
+\item{browserName}{firefox or chrome}
 }
 \description{
 init_selenium

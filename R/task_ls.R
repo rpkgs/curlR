@@ -21,7 +21,7 @@ task_ls <- function(taskname = NULL, wildcard = FALSE, encoding = 'UTF-8', ...){
         message('This function only works in windows!')
         return()
     }
-
+    
     change_code_page <- system("chcp 65001", intern = TRUE)
     pattern <- "*"
     if (wildcard ) {

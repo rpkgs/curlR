@@ -8,3 +8,6 @@ task/
 # inst/bin
 
 */temp/*
+*.xlsx
+*.exe
+*.log
